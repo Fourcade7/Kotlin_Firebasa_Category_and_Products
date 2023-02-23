@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity3">
+
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/purple_500"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textviewcategorynametitle"
+                android:layout_centerVertical="true"
+                android:textSize="22dp"
+                android:textColor="@color/white"
+                android:text="Birvajlar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></TextView>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleimageviewcategory"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/placeholder"
+                android:layout_width="30dp"
+                android:layout_height="30dp"></de.hdodenhof.circleimageview.CircleImageView>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        android:orientation="vertical">
+        <ImageView
+            android:src="@drawable/placeholder"
+            android:scaleType="centerCrop"
+            android:id="@+id/imageviewopengalleryproduct"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></ImageView>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittextbackground"
+            android:padding="10dp"
+            android:hint="Enter product name"
+            android:id="@+id/edittexnameproduct"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"></EditText>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittextbackground"
+            android:padding="10dp"
+            android:inputType="number"
+            android:hint="0 UZS"
+            android:id="@+id/edittexpriceproduct"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"></EditText>
+        <EditText
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittextbackground"
+            android:padding="10dp"
+            android:hint="Description"
+            android:id="@+id/edittexdescriptionproduct"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"></EditText>
+
+        <ProgressBar
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:id="@+id/progressBarhorizontalproduct"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" ></ProgressBar>
+
+        <TextView
+            android:visibility="gone"
+            android:textSize="40dp"
+            android:text="0%"
+            android:id="@+id/textviewprogressproduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></TextView>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            android:id="@+id/buttonaddproduct"
+            android:text="upload to firebase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Button>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
