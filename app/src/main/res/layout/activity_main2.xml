@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".view.MainActivity2">
+
+    <ImageView
+        android:src="@drawable/placeholder"
+        android:scaleType="centerCrop"
+        android:id="@+id/imageviewopengallery"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"></ImageView>
+    <EditText
+        android:layout_margin="15dp"
+        android:hint="Enter category name"
+        android:id="@+id/edittexcategoryname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></EditText>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBarhorizontal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" ></ProgressBar>
+
+    <TextView
+        android:visibility="gone"
+        android:textSize="40dp"
+        android:text="0%"
+        android:id="@+id/textviewprogress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
+    <Button
+        android:enabled="false"
+        android:id="@+id/buttonaddcategory"
+        android:text="upload to firebase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
+
+</LinearLayout>
