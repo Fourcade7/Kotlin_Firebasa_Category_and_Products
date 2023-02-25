@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.MainActivity4">
+
+    <ImageView
+        android:layout_weight="1"
+        android:id="@+id/imageviewforview"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ImageView>
+    <RelativeLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_above="@id/buttonaddtobadge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textviewproductname"
+                android:textSize="22dp"
+                android:textColor="@color/black"
+                android:text="Product Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+            <TextView
+                android:id="@+id/textviewproductdescriptonandprice"
+                android:layout_marginTop="8dp"
+                android:textSize="17dp"
+                android:text="Product Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
+        </LinearLayout>
+        <Button
+            android:id="@+id/buttonaddtobadge"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:text="add to badge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></Button>
+    </RelativeLayout>
+
+</LinearLayout>

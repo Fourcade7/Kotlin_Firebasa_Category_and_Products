@@ -6,4 +6,4 @@ class ProductModel constructor(
     val  price:String?=null,
     val  description:String?=null,
     val  pushkey:String?=null,
-)
+):java.io.Serializable

@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Kotlin_Firebasa_Category_and_Products"
         tools:targetApi="31">
         <activity
+            android:name=".view.MainActivity4"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity3"
             android:exported="false" />
         <activity

@@ -12,6 +12,9 @@
         app:cardElevation="6dp"
         >
         <LinearLayout
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/linearlayoutproductlayout"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
