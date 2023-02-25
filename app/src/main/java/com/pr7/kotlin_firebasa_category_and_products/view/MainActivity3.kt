@@ -3,6 +3,7 @@ package com.pr7.kotlin_firebasa_category_and_products.view
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -42,6 +43,22 @@ class MainActivity3 : AppCompatActivity() {
                     edittexdescriptionproduct.text.toString()
                 )
             }
+
+            productViewModel.uploadsucces().observe(this@MainActivity3,{
+                if (it){
+                    showprogress()
+                }else{
+                    hideprogress()
+                }
+            })
+
+            productViewModel.uploadproductprogress().observe(this@MainActivity3,{
+                textviewprogressproduct.text="${it.toInt()}%"
+                progressBarhorizontalproduct.progress=it.toInt()
+            })
+
+
+
         }
 
     }
@@ -57,6 +74,21 @@ class MainActivity3 : AppCompatActivity() {
         if (uri != null) {
             imageuri = uri
             binding.buttonaddproduct.isEnabled=true
+        }
+    }
+
+
+    //show progress hide progress
+    fun showprogress(){
+        binding.apply {
+            progressBarhorizontalproduct.visibility= View.VISIBLE
+            textviewprogressproduct.visibility= View.VISIBLE
+        }
+    }
+    fun hideprogress(){
+        binding.apply {
+            progressBarhorizontalproduct.visibility= View.GONE
+            textviewprogressproduct.visibility= View.GONE
         }
     }
 

@@ -1,7 +1,9 @@
 package com.pr7.kotlin_firebasa_category_and_products.viewmodel
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.model.repositories.RepositoryProduct
 
 class ProductViewModel constructor(
@@ -16,5 +18,21 @@ class ProductViewModel constructor(
         description:String
     ){
         repositoryProduct.addproduct(categoryname, name, uri, price, description)
+    }
+
+
+    fun readallproducts():MutableLiveData<ArrayList<ProductModel>>{
+      return  repositoryProduct.readallproductsfirebase()
+    }
+
+    fun readeverycategory(categoryname: String):MutableLiveData<ArrayList<ProductModel>>{
+        return repositoryProduct.readeverycategory(categoryname)
+    }
+
+    fun uploadproductprogress(): MutableLiveData<Double> {
+        return repositoryProduct.livedataprogress
+    }
+    fun uploadsucces(): MutableLiveData<Boolean> {
+        return repositoryProduct.livedatasucces
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pr7.kotlin_firebasa_category_and_products.CategoryModel
 import com.pr7.kotlin_firebasa_category_and_products.databinding.RecyclerviewItemCategoryBinding
+import com.pr7.kotlin_firebasa_category_and_products.view.MainActivity
 import com.pr7.kotlin_firebasa_category_and_products.view.MainActivity3
 
 class CategoryAdapter constructor(
@@ -15,6 +16,7 @@ class CategoryAdapter constructor(
     val arraylist: ArrayList<CategoryModel>,
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
+    val mainActivity:MainActivity=context as MainActivity
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -32,6 +34,10 @@ class CategoryAdapter constructor(
                 intent.putExtra("image",arraylist.get(position).imageurl)
                 context.startActivity(intent)
                 return@setOnLongClickListener true
+            }
+
+            linearlayoutcategorylayout.setOnClickListener {
+                mainActivity.categorychanged(arraylist.get(position).name!!)
             }
         }
     }
