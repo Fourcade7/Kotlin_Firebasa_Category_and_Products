@@ -5,4 +5,5 @@ object Constants {
     const val CATEGORIES="Categories"
     const val PRODUCTS="Products"
     const val ALLPRODUCTS="AllProducts"
+    const val USER_INFORMATION="UserInformation"
 }

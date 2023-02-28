@@ -1,51 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/drawerlayout"
     tools:context=".view.MainActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:background="@color/purple_500"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RelativeLayout
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:background="@color/purple_500"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@color/white"
-                android:textSize="22dp"
-                android:text="Categories and Products"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-            <ImageView
-                android:clickable="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:id="@+id/imageviewopenac2"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/round_add_24"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_width="35dp"
-                android:layout_height="35dp"></ImageView>
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/imageviewopennavigation"
+                    android:src="@drawable/round_list_24"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"></ImageView>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/imageviewopennavigation"
+                    android:id="@+id/textviewtitle"
+                    android:textColor="@color/white"
+                    android:textSize="22dp"
+                    android:text="Loading..."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+                <ImageView
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/imageviewopenac2"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/round_add_24"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"></ImageView>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewcategory"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewcategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewallproducts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewallproducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        app:headerLayout="@layout/headerlayout"
+        android:id="@+id/navigationview"
+        android:layout_gravity="start"
+        app:menu="@menu/formenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"></com.google.android.material.navigation.NavigationView>
 
 
 
 
 
-</LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

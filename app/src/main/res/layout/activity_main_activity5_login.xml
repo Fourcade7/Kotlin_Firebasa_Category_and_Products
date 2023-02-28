@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".view.MainActivity5Login">
+    <EditText
+        android:id="@+id/edittextloglogin"
+        android:layout_margin="5dp"
+        android:hint="Login"
+        android:padding="10dp"
+        android:background="@drawable/edittextbackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></EditText>
+    <EditText
+        android:id="@+id/edittextlogpassword"
+        android:layout_margin="5dp"
+        android:hint="********"
+        android:padding="10dp"
+        android:background="@drawable/edittextbackground"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></EditText>
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressbarlogin"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ProgressBar>
+    <Button
+        android:text="Login"
+        android:layout_margin="5dp"
+        android:id="@+id/buttonlog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></Button>
+    <TextView
+        android:id="@+id/textviewregopen"
+        android:clickable="true"
+        android:text="Register now"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+</LinearLayout>

@@ -12,6 +12,18 @@
         android:theme="@style/Theme.Kotlin_Firebasa_Category_and_Products"
         tools:targetApi="31">
         <activity
+            android:name=".view.MainActivity6Register"
+            android:exported="true" />
+        <activity
+            android:name=".view.MainActivity5Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".view.MainActivity4"
             android:exported="false" />
         <activity
@@ -23,11 +35,7 @@
         <activity
             android:name=".view.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

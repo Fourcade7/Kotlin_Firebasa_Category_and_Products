@@ -1,5 +1,6 @@
 package com.pr7.kotlin_firebasa_category_and_products.view
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -49,6 +50,8 @@ class MainActivity3 : AppCompatActivity() {
                     showprogress()
                 }else{
                     hideprogress()
+                    finish()
+                    //startActivity(Intent(this@MainActivity3,MainActivity::class.java))
                 }
             })
 
