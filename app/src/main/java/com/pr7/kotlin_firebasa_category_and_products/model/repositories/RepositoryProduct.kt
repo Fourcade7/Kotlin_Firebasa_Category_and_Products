@@ -30,6 +30,10 @@ class RepositoryProduct constructor(
 
     var livedataallproducts = MutableLiveData<ArrayList<ProductModel>>()
     var arraylistallproducts = ArrayList<ProductModel>()
+
+    //productallimages
+    var livedataproductallimages=MutableLiveData<ArrayList<ImageModel>>()
+    var arrayListproductallimages=ArrayList<ImageModel>()
     fun addproduct(
         categoryname: String,
         name: String,
@@ -38,17 +42,40 @@ class RepositoryProduct constructor(
         description: String,
         arraylistimage: ArrayList<Uri>
     ) {
+        //realtime added
         var pushkey = databaseReference.push().key.toString()
         //Realtime Database
         val product = ProductModel(
             name = name,
+            imguri=uri.toString(),
             price = price,
             description = description,
             pushkey = pushkey
         )
         databaseReference.child(categoryname).child(pushkey).setValue(product)
-        databaseReferenceall.child(pushkey).setValue(product)
 
+        if (uri != null) {
+            succes(true)
+            val filereference: StorageReference = storageReference.child(
+                System.currentTimeMillis().toString() + "." + System.currentTimeMillis()
+                    .toString()
+            )
+            filereference.putFile(uri)
+                .addOnSuccessListener {
+                    filereference.downloadUrl.addOnSuccessListener {rasm->
+                        databaseReferenceall.child(pushkey).setValue(product)
+                    }
+                }
+                .addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.getBytesTransferred() / it.getTotalByteCount()
+                    livedataprogress.value = progress
+
+
+                }
+        }
+        //realtime added
+        //add images
         for (imguri in arraylistimage) {
             if (imguri != null) {
                 succes(true)
@@ -58,8 +85,8 @@ class RepositoryProduct constructor(
                 )
                 filereference.putFile(imguri)
                     .addOnSuccessListener {
-                        filereference.downloadUrl.addOnSuccessListener {downloaduri ->
-                            val imageModel = ImageModel(imageurl = downloaduri.toString())
+                        filereference.downloadUrl.addOnSuccessListener {rasm->
+                            val imageModel = ImageModel(imageurl = rasm.toString())
                             databaseReferenceimages.child(pushkey).push().setValue(imageModel)
                             succes(false)
                         }
@@ -76,7 +103,7 @@ class RepositoryProduct constructor(
 
 
 
-
+        //add images
 
 
 
@@ -122,6 +149,30 @@ class RepositoryProduct constructor(
             }
         })
         return livedataallproducts
+    }
+
+
+    fun productallimages(pushkey:String):MutableLiveData<ArrayList<ImageModel>>{
+        databaseReferenceimages.child(pushkey).addValueEventListener(object :ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                arrayListproductallimages.clear()
+
+                for (datasnapshot:DataSnapshot in snapshot.children){
+                    val imageModel=datasnapshot.getValue(ImageModel::class.java)
+                    arrayListproductallimages.add(imageModel!!)
+                }
+                livedataproductallimages.value=arrayListproductallimages
+
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+        return livedataproductallimages
+
     }
 
 

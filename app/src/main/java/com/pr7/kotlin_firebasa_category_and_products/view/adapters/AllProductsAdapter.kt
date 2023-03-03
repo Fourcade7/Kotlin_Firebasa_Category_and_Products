@@ -24,7 +24,7 @@ class AllProductsAdapter constructor(
     override fun onBindViewHolder(holder: AllProductsViewHolder, position: Int) {
         holder.binding.apply {
             textviewallproducts.text=arrayList.get(position).name
-           // Glide.with(context).load(arrayList.get(position).uri).into(imageviewallproducts)
+            Glide.with(context).load(arrayList.get(position).imguri).into(imageviewallproducts)
             linearlayoutproductlayout.setOnClickListener {
                 val intent=Intent(context,MainActivity4::class.java)
                 intent.putExtra("product",arrayList.get(position))

@@ -46,6 +46,10 @@
             android:id="@+id/imageviewopengalleryproduct"
             android:layout_width="match_parent"
             android:layout_height="200dp"></ImageView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewselectimages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
         <EditText
             android:layout_marginTop="10dp"
             android:background="@drawable/edittextbackground"

@@ -7,12 +7,15 @@
     android:orientation="vertical"
     tools:context=".view.MainActivity4">
 
-    <ImageView
+    <com.denzcoskun.imageslider.ImageSlider
         android:layout_weight="1"
-        android:id="@+id/imageviewforview"
+        android:id="@+id/imageslider"
         android:scaleType="centerCrop"
+        app:iss_placeholder="@drawable/placeholder"
+        app:iss_auto_cycle="true"
+        app:iss_period="1000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ImageView>
+        android:layout_height="match_parent"></com.denzcoskun.imageslider.ImageSlider>
     <RelativeLayout
         android:layout_weight="2"
         android:layout_width="match_parent"

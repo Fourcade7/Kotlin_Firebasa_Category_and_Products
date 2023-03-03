@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMainBinding
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.IMAGES
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.USER_INFORMATION
 import com.pr7.kotlin_firebasa_category_and_products.view.adapters.AllProductsAdapter
 import com.pr7.kotlin_firebasa_category_and_products.view.adapters.CategoryAdapter
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var productViewModel: ProductViewModel
     lateinit var allProductsAdapter: AllProductsAdapter
     lateinit var databaseReference: DatabaseReference
+    lateinit var databaseReferenceproductimages: DatabaseReference
     var useruid:String?=null
     var admin=false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             binding.imageviewopenac2.visibility= View.VISIBLE
         }
         databaseReference=FirebaseDatabase.getInstance().getReference().child(USER_INFORMATION).child(useruid!!)
+        databaseReferenceproductimages=FirebaseDatabase.getInstance().getReference().child(IMAGES)
 
         val view=binding.navigationview.getHeaderView(0)
         val textViewusername:TextView=view.findViewById(R.id.textviewheaderusername)
@@ -68,9 +71,6 @@ class MainActivity : AppCompatActivity() {
 
             }
         })
-
-
-
 
         binding.apply {
             imageviewopenac2.setOnClickListener {

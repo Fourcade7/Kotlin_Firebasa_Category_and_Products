@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pr7.kotlin_firebasa_category_and_products.ProductModel
+import com.pr7.kotlin_firebasa_category_and_products.model.ImageModel
 import com.pr7.kotlin_firebasa_category_and_products.model.repositories.RepositoryProduct
 
 class ProductViewModel constructor(
@@ -35,5 +36,10 @@ class ProductViewModel constructor(
     }
     fun uploadsucces(): MutableLiveData<Boolean> {
         return repositoryProduct.livedatasucces
+    }
+
+
+    fun productallimages(pushkey:String):MutableLiveData<ArrayList<ImageModel>>{
+        return repositoryProduct.productallimages(pushkey)
     }
 }

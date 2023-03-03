@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMain3Binding
+import com.pr7.kotlin_firebasa_category_and_products.view.adapters.SelectAdapter
 import com.pr7.kotlin_firebasa_category_and_products.viewmodel.ProductViewModel
 
 class MainActivity3 : AppCompatActivity() {
@@ -19,6 +22,7 @@ class MainActivity3 : AppCompatActivity() {
     var imageuri:Uri?=null
     lateinit var productViewModel: ProductViewModel
     var arraylistimage = ArrayList<Uri>()
+    lateinit var selectAdapter: SelectAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMain3Binding.inflate(layoutInflater)
@@ -79,6 +83,9 @@ class MainActivity3 : AppCompatActivity() {
             imageuri = uri
             arraylistimage.add(uri)
             binding.buttonaddproduct.isEnabled=true
+            binding.recyclerviewselectimages.layoutManager=LinearLayoutManager(this@MainActivity3,RecyclerView.HORIZONTAL,false)
+            selectAdapter=SelectAdapter(this@MainActivity3,arraylistimage)
+            binding.recyclerviewselectimages.adapter=selectAdapter
         }
     }
 
