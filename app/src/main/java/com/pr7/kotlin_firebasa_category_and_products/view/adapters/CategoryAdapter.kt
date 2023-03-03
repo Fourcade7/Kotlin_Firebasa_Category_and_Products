@@ -28,11 +28,15 @@ class CategoryAdapter constructor(
             textviewcategorytext.text=arraylist.get(position).name
             Glide.with(context).load(arraylist.get(position).imageurl).into(imageviewcategoryimage)
 
+
             linearlayoutcategorylayout.setOnLongClickListener {
                 val intent=Intent(context,MainActivity3::class.java)
                 intent.putExtra("name",arraylist.get(position).name)
                 intent.putExtra("image",arraylist.get(position).imageurl)
-                context.startActivity(intent)
+                if (mainActivity.admin){
+                    context.startActivity(intent)
+                }
+
                 return@setOnLongClickListener true
             }
 

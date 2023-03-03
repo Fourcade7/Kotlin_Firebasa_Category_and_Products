@@ -37,6 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>
                 <ImageView
+                    android:visibility="invisible"
                     android:clickable="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:id="@+id/imageviewopenac2"

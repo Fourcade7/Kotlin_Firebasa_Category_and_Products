@@ -18,6 +18,7 @@ class MainActivity3 : AppCompatActivity() {
     var categoryimage:String?=null
     var imageuri:Uri?=null
     lateinit var productViewModel: ProductViewModel
+    var arraylistimage = ArrayList<Uri>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMain3Binding.inflate(layoutInflater)
@@ -41,7 +42,8 @@ class MainActivity3 : AppCompatActivity() {
                     edittexnameproduct.text.toString(),
                     imageuri!!,
                     edittexpriceproduct.text.toString(),
-                    edittexdescriptionproduct.text.toString()
+                    edittexdescriptionproduct.text.toString(),
+                    arraylistimage
                 )
             }
 
@@ -50,7 +52,6 @@ class MainActivity3 : AppCompatActivity() {
                     showprogress()
                 }else{
                     hideprogress()
-                    finish()
                     //startActivity(Intent(this@MainActivity3,MainActivity::class.java))
                 }
             })
@@ -76,6 +77,7 @@ class MainActivity3 : AppCompatActivity() {
         binding.imageviewopengalleryproduct.setImageURI(uri)
         if (uri != null) {
             imageuri = uri
+            arraylistimage.add(uri)
             binding.buttonaddproduct.isEnabled=true
         }
     }

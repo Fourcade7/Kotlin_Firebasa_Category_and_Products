@@ -15,9 +15,10 @@ class ProductViewModel constructor(
         name:String,
         uri: Uri,
         price:String,
-        description:String
+        description:String,
+        arraylistimage:ArrayList<Uri>
     ){
-        repositoryProduct.addproduct(categoryname, name, uri, price, description)
+        repositoryProduct.addproduct(categoryname, name, uri, price, description,arraylistimage)
     }
 
 

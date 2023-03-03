@@ -17,7 +17,7 @@ class MainActivity4 : AppCompatActivity() {
         setContentView(binding.root)
         binding.apply {
             var product:ProductModel= intent.getSerializableExtra("product") as ProductModel
-            Glide.with(this@MainActivity4).load(product.imageurl).into(imageviewforview)
+           // Glide.with(this@MainActivity4).load(product.uri).into(imageviewforview)
             textviewproductname.text="${product!!.name}"
             textviewproductdescriptonandprice.text="${product!!.price}\n${product!!.description}"
         }

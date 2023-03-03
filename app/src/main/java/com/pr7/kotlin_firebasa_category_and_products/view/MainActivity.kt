@@ -5,8 +5,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var allProductsAdapter: AllProductsAdapter
     lateinit var databaseReference: DatabaseReference
     var useruid:String?=null
+    var admin=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -36,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this@MainActivity).get(CategoryViewModel::class.java)
         productViewModel= ViewModelProvider(this@MainActivity).get(ProductViewModel::class.java)
         useruid=intent.getStringExtra("uid")
+        if (useruid=="XGPkArKyVOeqdjgtl9MFzLsz0D12"){
+            admin=true
+            binding.imageviewopenac2.visibility= View.VISIBLE
+        }
         databaseReference=FirebaseDatabase.getInstance().getReference().child(USER_INFORMATION).child(useruid!!)
 
         val view=binding.navigationview.getHeaderView(0)
