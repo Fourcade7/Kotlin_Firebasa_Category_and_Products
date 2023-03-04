@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMainBinding
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.IMAGES
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.USERNAME
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.USER_INFORMATION
 import com.pr7.kotlin_firebasa_category_and_products.view.adapters.AllProductsAdapter
 import com.pr7.kotlin_firebasa_category_and_products.view.adapters.CategoryAdapter
@@ -31,12 +34,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var allProductsAdapter: AllProductsAdapter
     lateinit var databaseReference: DatabaseReference
     lateinit var databaseReferenceproductimages: DatabaseReference
+    var databaseReferenceorder: DatabaseReference=FirebaseDatabase.getInstance().getReference().child(Constants.ORDERS)
+    var arraylistallorder=ArrayList<ProductModel>()
     var useruid:String?=null
     var admin=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        USERNAME=""
         supportActionBar!!.hide()
         viewModel= ViewModelProvider(this@MainActivity).get(CategoryViewModel::class.java)
         productViewModel= ViewModelProvider(this@MainActivity).get(ProductViewModel::class.java)
@@ -61,10 +67,29 @@ class MainActivity : AppCompatActivity() {
                 var address=snapshot.child("address").getValue().toString()
                 var email=snapshot.child("email").getValue().toString()
                 var password=snapshot.child("password").getValue().toString()
+                USERNAME=name
+
                 binding.textviewtitle.text=name
                 textViewusername.text="$name $surname"
                 textViewemail.text=email
                 textViewphone.text=phone
+
+
+                //ORDER BADGE
+                databaseReferenceorder.child(name).addValueEventListener(object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        arraylistallorder.clear()
+                        for (datasnapshot:DataSnapshot in snapshot.children){
+                            var productModel=datasnapshot.getValue(ProductModel::class.java)
+                            arraylistallorder.add(productModel!!)
+                        }
+                       binding.badgecounter.text="${arraylistallorder.size}"
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+                //ORDER
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -108,6 +133,9 @@ class MainActivity : AppCompatActivity() {
                 return@setNavigationItemSelectedListener true
 
             }
+
+
+
         }
     }
 

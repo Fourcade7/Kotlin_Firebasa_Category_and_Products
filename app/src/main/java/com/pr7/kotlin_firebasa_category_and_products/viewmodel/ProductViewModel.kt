@@ -42,4 +42,25 @@ class ProductViewModel constructor(
     fun productallimages(pushkey:String):MutableLiveData<ArrayList<ImageModel>>{
         return repositoryProduct.productallimages(pushkey)
     }
+
+    //ORDER
+    fun addneworder(
+        name: String,
+        imguri:String,
+        price:String,
+        description:String,
+        pushkey: String,
+    ){
+        repositoryProduct.neworder(
+            name = name,
+            imguri = imguri,
+            price = price,
+            description = description,
+            pushkey = pushkey
+        )
+    }
+
+    fun readallorderss():MutableLiveData<ArrayList<ProductModel>>{
+        return repositoryProduct.readallorders()
+    }
 }

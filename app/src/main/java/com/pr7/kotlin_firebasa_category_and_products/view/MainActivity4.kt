@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -13,12 +14,14 @@ import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMain4Binding
 import com.pr7.kotlin_firebasa_category_and_products.model.ImageModel
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.IMAGES
+import com.pr7.kotlin_firebasa_category_and_products.viewmodel.ProductViewModel
 
 class MainActivity4 : AppCompatActivity() {
     lateinit var binding: ActivityMain4Binding
     lateinit var databaseReference: DatabaseReference
     var arraylist=ArrayList<ImageModel>()
     val imageList = ArrayList<SlideModel>()
+    lateinit var productViewModel: ProductViewModel
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,19 @@ class MainActivity4 : AppCompatActivity() {
 
                 }
             })
+
+
+            //ORDER
+            productViewModel=ViewModelProvider(this@MainActivity4).get(ProductViewModel::class.java)
+            buttonaddtobadge.setOnClickListener {
+            productViewModel.addneworder(
+                name = product.name!!,
+                imguri = product.imguri!!,
+                price = product.price!!,
+                description = product.description!!,
+                pushkey = product.pushkey!!
+            )
+            }
 
         }
 

@@ -36,6 +36,32 @@
                     android:text="Loading..."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/relarivelayoutbadge"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:id="@+id/imagevieworder"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/round_shopping_basket_24"
+                        android:layout_centerVertical="true"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"></ImageView>
+                    <TextView
+                        android:id="@+id/badgecounter"
+                        android:layout_marginLeft="18dp"
+                        android:gravity="center"
+                        android:background="@drawable/baseline_lens_24"
+                        android:textColor="@color/white"
+                        android:text="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"></TextView>
+                </RelativeLayout>
+
                 <ImageView
                     android:visibility="invisible"
                     android:clickable="true"
@@ -43,7 +69,7 @@
                     android:id="@+id/imageviewopenac2"
                     android:layout_marginRight="15dp"
                     android:src="@drawable/round_add_24"
-                    android:layout_alignParentEnd="true"
+                    android:layout_toLeftOf="@id/relarivelayoutbadge"
                     android:layout_centerVertical="true"
                     android:layout_width="35dp"
                     android:layout_height="35dp"></ImageView>

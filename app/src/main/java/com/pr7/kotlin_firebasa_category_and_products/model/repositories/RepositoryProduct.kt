@@ -12,7 +12,9 @@ import com.pr7.kotlin_firebasa_category_and_products.utils.Constants
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.ALLPRODUCTS
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.CATEGORIES
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.IMAGES
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.ORDERS
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.PRODUCTS
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.USERNAME
 
 class RepositoryProduct constructor(
     var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference()
@@ -22,7 +24,9 @@ class RepositoryProduct constructor(
     var databaseReferenceall: DatabaseReference = FirebaseDatabase.getInstance().getReference()
         .child(ALLPRODUCTS),
     var storageReference: StorageReference = FirebaseStorage.getInstance().getReference()
-        .child(PRODUCTS)
+        .child(PRODUCTS),
+    var databaseReferenceorder: DatabaseReference=FirebaseDatabase.getInstance().getReference().child(
+        ORDERS)
 ) {
 
     var livedatasucces = MutableLiveData<Boolean>()
@@ -34,6 +38,10 @@ class RepositoryProduct constructor(
     //productallimages
     var livedataproductallimages=MutableLiveData<ArrayList<ImageModel>>()
     var arrayListproductallimages=ArrayList<ImageModel>()
+
+    //ORDER
+    var arraylistallorder=ArrayList<ProductModel>()
+    var livedataallorder=MutableLiveData<ArrayList<ProductModel>>()
     fun addproduct(
         categoryname: String,
         name: String,
@@ -178,6 +186,46 @@ class RepositoryProduct constructor(
 
     fun succes(boolean: Boolean) {
         livedatasucces.value = boolean
+    }
+
+
+    //Order
+
+    fun neworder(
+        name: String,
+        imguri:String,
+        price:String,
+        description:String,
+        pushkey: String,
+    ){
+        val productModel=ProductModel(
+            name = name,
+            imguri = imguri,
+            price = price,
+            description = description,
+            pushkey = pushkey
+        )
+
+        databaseReferenceorder.child(USERNAME).push().setValue(productModel)
+    }
+
+
+    //READ ORDER
+    fun readallorders():MutableLiveData<ArrayList<ProductModel>>{
+        databaseReferenceorder.child(USERNAME).addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                arraylistallorder.clear()
+                for (datasnapshot:DataSnapshot in snapshot.children){
+                    var productModel=datasnapshot.getValue(ProductModel::class.java)
+                    arraylistallorder.add(productModel!!)
+                }
+                livedataallorder.value=arraylistallorder
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+        return livedataallorder
     }
 
 }

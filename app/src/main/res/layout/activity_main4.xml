@@ -12,7 +12,7 @@
         android:id="@+id/imageslider"
         android:scaleType="centerCrop"
         app:iss_placeholder="@drawable/placeholder"
-        app:iss_auto_cycle="true"
+        app:iss_auto_cycle="false"
         app:iss_period="1000"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.denzcoskun.imageslider.ImageSlider>
