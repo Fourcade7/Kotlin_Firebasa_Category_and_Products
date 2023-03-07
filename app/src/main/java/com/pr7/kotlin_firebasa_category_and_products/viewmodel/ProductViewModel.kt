@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.model.ImageModel
+import com.pr7.kotlin_firebasa_category_and_products.model.OrderModel
 import com.pr7.kotlin_firebasa_category_and_products.model.repositories.RepositoryProduct
 
 class ProductViewModel constructor(
@@ -60,7 +61,33 @@ class ProductViewModel constructor(
         )
     }
 
-    fun readallorderss():MutableLiveData<ArrayList<ProductModel>>{
-        return repositoryProduct.readallorders()
+    fun readallorderss(username:String):MutableLiveData<ArrayList<ProductModel>>{
+        return repositoryProduct.readallorders(username)
     }
+
+    //Buy
+    fun buy(
+        orders :String,
+        username :String,
+        surname :String,
+        phone :String,
+        address :String,
+        datatime :String
+    ){
+
+        repositoryProduct.buyproduct(
+            orders,
+            username ,
+            surname ,
+            phone ,
+            address ,
+            datatime
+        )
+
+    }
+
+    fun buysucces():MutableLiveData<Boolean>{
+        return repositoryProduct.livedatabuy
+    }
+    //Buy
 }

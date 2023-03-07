@@ -8,9 +8,12 @@ import com.google.firebase.storage.StorageReference
 import com.pr7.kotlin_firebasa_category_and_products.CategoryModel
 import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.model.ImageModel
+import com.pr7.kotlin_firebasa_category_and_products.model.OrderModel
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.ADMINORDER
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.ALLPRODUCTS
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.CATEGORIES
+import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.HISTORY
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.IMAGES
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.ORDERS
 import com.pr7.kotlin_firebasa_category_and_products.utils.Constants.PRODUCTS
@@ -26,7 +29,11 @@ class RepositoryProduct constructor(
     var storageReference: StorageReference = FirebaseStorage.getInstance().getReference()
         .child(PRODUCTS),
     var databaseReferenceorder: DatabaseReference=FirebaseDatabase.getInstance().getReference().child(
-        ORDERS)
+        ORDERS),
+    var databaseReferenceadminorder: DatabaseReference=FirebaseDatabase.getInstance().getReference().child(
+        ADMINORDER),
+    var databaseReferencehistory: DatabaseReference=FirebaseDatabase.getInstance().getReference().child(
+        HISTORY)
 ) {
 
     var livedatasucces = MutableLiveData<Boolean>()
@@ -42,6 +49,8 @@ class RepositoryProduct constructor(
     //ORDER
     var arraylistallorder=ArrayList<ProductModel>()
     var livedataallorder=MutableLiveData<ArrayList<ProductModel>>()
+    //BUY
+    var livedatabuy=MutableLiveData<Boolean>()
     fun addproduct(
         categoryname: String,
         name: String,
@@ -211,8 +220,8 @@ class RepositoryProduct constructor(
 
 
     //READ ORDER
-    fun readallorders():MutableLiveData<ArrayList<ProductModel>>{
-        databaseReferenceorder.child(USERNAME).addValueEventListener(object :ValueEventListener{
+    fun readallorders(username:String):MutableLiveData<ArrayList<ProductModel>>{
+        databaseReferenceorder.child(username).addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 arraylistallorder.clear()
                 for (datasnapshot:DataSnapshot in snapshot.children){
@@ -227,5 +236,37 @@ class RepositoryProduct constructor(
         })
         return livedataallorder
     }
+
+
+    //Buy
+    fun buyproduct(
+        orders :String,
+        username :String,
+        surname :String,
+        phone :String,
+        address :String,
+        datatime :String
+    ){
+        livedatabuy.value=false
+
+        val orderModel=OrderModel(
+            orders = orders,
+            username = username,
+            surname = surname,
+            phone = phone,
+            address = address,
+            datatime = datatime
+        )
+        databaseReferenceadminorder.push().setValue(orderModel)
+        databaseReferencehistory.child(phone).push().setValue(orderModel).addOnCompleteListener {
+            if (it.isSuccessful){
+                livedatabuy.value=true
+                databaseReferenceorder.child(username).removeValue()
+            }
+        }
+
+    }
+    //Buy
+
 
 }

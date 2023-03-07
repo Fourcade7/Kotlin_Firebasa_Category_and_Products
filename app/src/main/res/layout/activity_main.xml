@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
+            android:translationZ="1dp"
             android:background="@color/purple_500"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -38,6 +39,7 @@
                     android:layout_height="wrap_content"></TextView>
 
                 <RelativeLayout
+                    android:translationZ="2dp"
                     android:id="@+id/relarivelayoutbadge"
                     android:layout_alignParentEnd="true"
                     android:layout_width="wrap_content"

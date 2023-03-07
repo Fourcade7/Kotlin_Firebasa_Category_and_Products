@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Kotlin_Firebasa_Category_and_Products"
         tools:targetApi="31">
         <activity
+            android:name=".view.MainActivity9"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity8"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity7"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity6Register"
             android:exported="true" />
         <activity
@@ -34,9 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

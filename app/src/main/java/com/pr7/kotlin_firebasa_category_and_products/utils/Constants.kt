@@ -9,4 +9,6 @@ object Constants {
     const val IMAGES="ProductImages"
     const val ORDERS="Orders"
     var USERNAME=""
+    const val ADMINORDER="AdminOrder"
+    const val HISTORY="History"
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
@@ -38,11 +39,16 @@ class MainActivity : AppCompatActivity() {
     var arraylistallorder=ArrayList<ProductModel>()
     var useruid:String?=null
     var admin=false
+
+    //
+    var surname:String=""
+    var phone:String=""
+    var adress:String=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        USERNAME=""
         supportActionBar!!.hide()
         viewModel= ViewModelProvider(this@MainActivity).get(CategoryViewModel::class.java)
         productViewModel= ViewModelProvider(this@MainActivity).get(ProductViewModel::class.java)
@@ -62,12 +68,16 @@ class MainActivity : AppCompatActivity() {
         databaseReference.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 var name=snapshot.child("name").getValue().toString()
-                var surname=snapshot.child("surname").getValue().toString()
-                var phone=snapshot.child("phone").getValue().toString()
+                var surnamee=snapshot.child("surname").getValue().toString()
+                var phonee=snapshot.child("phone").getValue().toString()
                 var address=snapshot.child("address").getValue().toString()
                 var email=snapshot.child("email").getValue().toString()
                 var password=snapshot.child("password").getValue().toString()
                 USERNAME=name
+                surname=surnamee
+                phone=phonee
+                adress=address
+                Log.d("PR77777", "onDataChange: $USERNAME")
 
                 binding.textviewtitle.text=name
                 textViewusername.text="$name $surname"
@@ -123,7 +133,11 @@ class MainActivity : AppCompatActivity() {
             navigationview.setNavigationItemSelectedListener {
 
                 when(it.itemId){
-                    R.id.item1->{}
+                    R.id.item1->{
+                        val intent=Intent(this@MainActivity,MainActivity8::class.java)
+                        intent.putExtra("phone", phone)
+                        startActivity(intent)
+                    }
                     R.id.item2->{
                         save(null)
                         finish()
@@ -131,6 +145,21 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 return@setNavigationItemSelectedListener true
+
+            }
+
+            imagevieworder.setOnClickListener {
+                if (useruid=="XGPkArKyVOeqdjgtl9MFzLsz0D12"){
+                    val intent=Intent(this@MainActivity,MainActivity9::class.java)
+                    startActivity(intent)
+                }else{
+                    val intent=Intent(this@MainActivity,MainActivity7::class.java)
+                    intent.putExtra("username", USERNAME)
+                    intent.putExtra("surname", surname)
+                    intent.putExtra("adress", adress)
+                    intent.putExtra("phone", phone)
+                    startActivity(intent)
+                }
 
             }
 
