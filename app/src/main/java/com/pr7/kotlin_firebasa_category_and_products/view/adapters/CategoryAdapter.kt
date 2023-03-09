@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pr7.kotlin_firebasa_category_and_products.CategoryModel
+import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.databinding.RecyclerviewItemCategoryBinding
 import com.pr7.kotlin_firebasa_category_and_products.view.MainActivity
 import com.pr7.kotlin_firebasa_category_and_products.view.MainActivity3
 
 class CategoryAdapter constructor(
     val context: Context,
-    val arraylist: ArrayList<CategoryModel>,
+    var arraylist: ArrayList<CategoryModel>,
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     val mainActivity:MainActivity=context as MainActivity
@@ -49,6 +50,10 @@ class CategoryAdapter constructor(
     override fun getItemCount(): Int =arraylist.size
 
 
+    fun filterList(filteredList: ArrayList<CategoryModel>) {
+        arraylist = filteredList
+        notifyDataSetChanged()
+    }
 
     class CategoryViewHolder(val binding: RecyclerviewItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root)

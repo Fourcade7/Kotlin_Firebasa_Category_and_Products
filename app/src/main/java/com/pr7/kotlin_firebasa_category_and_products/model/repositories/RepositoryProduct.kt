@@ -215,7 +215,7 @@ class RepositoryProduct constructor(
             pushkey = pushkey
         )
 
-        databaseReferenceorder.child(USERNAME).push().setValue(productModel)
+        databaseReferenceorder.child(USERNAME).child(pushkey).setValue(productModel)
     }
 
 

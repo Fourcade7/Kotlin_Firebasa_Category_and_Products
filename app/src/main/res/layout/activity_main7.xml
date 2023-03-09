@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.MainActivity7">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewfavorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"

@@ -4,14 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMain7Binding
+import com.pr7.kotlin_firebasa_category_and_products.view.adapters.FavoriteAdapter
 import com.pr7.kotlin_firebasa_category_and_products.viewmodel.ProductViewModel
 import java.util.Calendar
 
 class MainActivity7 : AppCompatActivity() {
     lateinit var productViewModel: ProductViewModel
     lateinit var binding: ActivityMain7Binding
+    lateinit var favoriteAdapter: FavoriteAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMain7Binding.inflate(layoutInflater)
@@ -24,12 +27,18 @@ class MainActivity7 : AppCompatActivity() {
         productViewModel=ViewModelProvider(this@MainActivity7).get(ProductViewModel::class.java)
 
         productViewModel.readallorderss(username!!).observe(this@MainActivity7,{
+                binding.textvieworderreadac7.text=""
                 var totalcost:Int=0
                 for (i in 0 until it.size){
                     binding.textvieworderreadac7.append("${it.get(i).name} ${it.get(i).price}\n")
                     totalcost=totalcost+it.get(i).price!!.toInt()
                 }
                 binding.textvieworderreadac7.append("\nTotal Cost $totalcost")
+                binding.apply {
+                    recyclerviewfavorite.layoutManager=LinearLayoutManager(this@MainActivity7)
+                    favoriteAdapter=FavoriteAdapter(this@MainActivity7,it)
+                    recyclerviewfavorite.adapter=favoriteAdapter
+                }
         })
 
         binding.buttonbuy.setOnClickListener {

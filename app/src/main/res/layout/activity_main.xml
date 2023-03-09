@@ -78,6 +78,17 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
+        <EditText
+            android:drawablePadding="10dp"
+            android:hint="Search"
+            android:drawableLeft="@drawable/round_search_24"
+            android:id="@+id/edittextsearch"
+            android:background="@drawable/edittextbackground"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewcategory"
             android:layout_width="match_parent"

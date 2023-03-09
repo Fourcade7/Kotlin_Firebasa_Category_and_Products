@@ -13,7 +13,7 @@ import com.pr7.kotlin_firebasa_category_and_products.view.MainActivity4
 
 class AllProductsAdapter constructor(
     val context: Context,
-    val arrayList: ArrayList<ProductModel>
+    var arrayList: ArrayList<ProductModel>
 ):RecyclerView.Adapter<AllProductsAdapter.AllProductsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllProductsViewHolder {
@@ -35,6 +35,12 @@ class AllProductsAdapter constructor(
     }
 
     override fun getItemCount(): Int =arrayList.size
+
+
+    fun filterList(filteredList: ArrayList<ProductModel>) {
+        arrayList = filteredList
+        notifyDataSetChanged()
+    }
 
     class AllProductsViewHolder(val binding: RecyclerviewItemallproductsBinding):RecyclerView.ViewHolder(binding.root)
 }

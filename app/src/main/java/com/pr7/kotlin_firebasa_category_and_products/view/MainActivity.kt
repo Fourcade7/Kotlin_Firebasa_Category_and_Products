@@ -4,17 +4,21 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
+import com.pr7.kotlin_firebasa_category_and_products.CategoryModel
 import com.pr7.kotlin_firebasa_category_and_products.ProductModel
 import com.pr7.kotlin_firebasa_category_and_products.R
 import com.pr7.kotlin_firebasa_category_and_products.databinding.ActivityMainBinding
@@ -39,6 +43,10 @@ class MainActivity : AppCompatActivity() {
     var arraylistallorder=ArrayList<ProductModel>()
     var useruid:String?=null
     var admin=false
+
+    //Search
+    var arraylistallproducts=ArrayList<ProductModel>()
+    var arraylistallcategories=ArrayList<CategoryModel>()
 
     //
     var surname:String=""
@@ -113,6 +121,7 @@ class MainActivity : AppCompatActivity() {
             }
             recyclerviewcategory.layoutManager=LinearLayoutManager(this@MainActivity,RecyclerView.HORIZONTAL,false)
             viewModel.readallcategory().observe(this@MainActivity,{
+                arraylistallcategories=it
                 categoryAdapter=CategoryAdapter(this@MainActivity,it)
                 recyclerviewcategory.adapter=categoryAdapter
             })
@@ -120,6 +129,7 @@ class MainActivity : AppCompatActivity() {
             recyclerviewallproducts.layoutManager=GridLayoutManager(this@MainActivity,3)
 
             productViewModel.readallproducts().observe(this@MainActivity,{
+                arraylistallproducts=it
                 it.shuffle()
                 allProductsAdapter=AllProductsAdapter(this@MainActivity,it)
                 recyclerviewallproducts.adapter=allProductsAdapter
@@ -163,6 +173,20 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+            edittextsearch.addTextChangedListener(object :TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+                    filter(p0.toString())
+                }
+
+            })
 
 
         }
@@ -182,6 +206,35 @@ class MainActivity : AppCompatActivity() {
         editor.putString("pr", text)
         editor.commit()
     }
+
+
+    //Search
+
+    fun filter(text:String){
+        val searcharraylist=ArrayList<ProductModel>()
+
+        //PRoducts
+        for (item:ProductModel in arraylistallproducts){
+            if (item.name?.toLowerCase()!!.contains(text.toLowerCase())){
+                searcharraylist.add(item)
+            }
+        }
+        allProductsAdapter.filterList(searcharraylist)
+
+        //Categories
+        val searcharraylist2=ArrayList<CategoryModel>()
+        for (item:CategoryModel in arraylistallcategories){
+            if (item.name?.toLowerCase()!!.contains(text.toLowerCase())){
+                searcharraylist2.add(item)
+            }
+        }
+        categoryAdapter.filterList(searcharraylist2)
+
+
+    }
+
+
+
 
 
 
